@@ -49,7 +49,6 @@ class GraspDetector:
         self.method = args.method
         self.all_points_num = args.all_points_num
         # self.all_points_num = 51200
-        ######## 幹你娘這個要改
         ######## /REGNet-V2/dataset_utils/eval_score/eval_utils/evaluation_data_generator.py
         ######## 上面路徑是碰撞測試的code
         self.table_height = args.table_height
@@ -61,7 +60,7 @@ class GraspDetector:
         self.bounds = args.bounds
 
 
-        ########## 這她媽不知道三小，但感覺也要改，操你媽這個參數根本沒用到
+        ########## 操你媽這個參數根本沒用到
         # self.center_camera = np.array([-0.1023, -0.0864, 1.6796])
         # self.rot_x_angle = 0.2*np.pi#-0.87*np.pi
         
@@ -161,7 +160,7 @@ class GraspDetector:
         euler_rad = np.radians(euler_deg)  # 轉成 rad
         R = transforms3d.euler.euler2mat(*euler_rad, axes='sxyz')
         view_dir = R[:, 2]  # 第三列是相機 z 軸在世界中的方向
-        # Step 4: 根據視線方向算 elev, azim
+        # 根據視線方向算 elev, azim
         x, y, z = view_dir
         azim = np.degrees(np.arctan2(y, x))   # xy 平面角度
         elev = np.degrees(np.arcsin(z / np.linalg.norm(view_dir)))
@@ -246,10 +245,6 @@ class GraspDetector:
         ax.set_ylim(cy - 0.5, cy + 0.5)
         ax.set_zlim(cz - 0.2, cz + 0.35)
         ax.set_box_aspect([1, 1, 1])
-        # ax.view_init(elev=10, azim=90) # 原始demo的參數
-        # ax.view_init(elev=80, azim=130)  # our1的參數
-        # ax.view_init(elev=50, azim=80)  # our2
-        # ax.view_init(elev=45, azim=105)
         init_elev, init_azim = self.get_view_init()
         ax.dist = 5
         camera_view = save_path + "camera_view.png"
@@ -262,10 +257,8 @@ class GraspDetector:
                 plt.savefig(camera_view[:-4]+f"_{angle}.png", dpi=300)
         else:
             ax.view_init(elev=init_elev, azim=init_azim)
-            # plt.tight_layout()
             plt.savefig(camera_view, dpi=300)
             ax.view_init(elev=args.horizontal_view_elev, azim=args.horizontal_view_azim)
-            # plt.tight_layout()
             plt.savefig(horizontal_view, dpi=300)
 
         plt.close()
@@ -703,16 +696,10 @@ class GraspDetector:
 
 def main():
     import glob
-    # pc_paths = glob.glob("./test_file/*/*1.npy")
     pc_paths = glob.glob(args.pc_paths)
     destination_folder = args.vis_output + args.exp_name + '/'
     os.makedirs(destination_folder, exist_ok=True)
     
-    # pc_paths = glob.glob("test_file/*/*2.npy")
-    # args.camera = 'kinectdk_right'
-
-    # pc_paths = glob.glob("test_file/*/*3.npy")
-    # args.camera = 'kinectdk_left'
     GDetector = GraspDetector(args.method)
 
     for pc_path in pc_paths:
@@ -725,8 +712,6 @@ def main():
         GDetector.generate_grasp_from_file(pc, pc_path)
         end_time = time.time()
         print("一次時間 = ", end_time - start_time)
-    # pc = np.load("/home/tomyeh/env/REGNet-v2/REGNet-V2/test_file/our_1.npy")
-    # GDetector.generate_grasp_from_file(pc, "/home/tomyeh/env/REGNet-v2/REGNet-V2/test_file/our_1.npy")
     shutil.copy("config.yaml", destination_folder)
 
 if __name__ == "__main__":

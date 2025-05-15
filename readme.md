@@ -4,7 +4,7 @@
 
 # Inference
 * Inference code: REGNet-V2/grasp_detect_from_file_multiobjects.py
-* Inference config: REGNet-V2/config.yaml
+* Inference config: REGNet-V2/config.yaml，裡面有註解全部的超參數
 * 爪超參數: REGNet-V2/dataset_utils/eval_score/configs/config.py
 
 # Input and output
