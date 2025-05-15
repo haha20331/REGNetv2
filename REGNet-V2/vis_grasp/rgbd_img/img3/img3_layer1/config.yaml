@@ -1,0 +1,26 @@
+cuda: true
+gpu: 0
+exp_name: img3
+pc_paths: ./test_file/our3.npy # 場景點雲路徑
+vis_output: ./vis_grasp/ # 儲存視覺化地方
+
+# 須配合機械手臂和環境調整的參數
+eval_width: 0.06 # 機器手臂夾爪寬度
+all_points_num: 25600 # 點雲sample的point數量
+table_height: 0 # 會把高度低於該值得grasp pose篩掉
+bounds: [-0.5, 0.5, -0.5, 0.5] # 會把超出該範圍的grasp 篩掉
+camera_transform:
+  # euler_deg: [-147.6, 0.0, 180.0]  # XYZ 歐拉角
+  euler_deg: [-140, 0.0, 180.0]  # XYZ 歐拉角
+  translation: [0.0, 0.0, 1.0]     # T_x, T_y, T_z
+# 夾爪超參數在/home/tomyeh/env/REGNet-v2/REGNet-V2/dataset_utils/eval_score/configs/config.py
+# 當中包含夾爪爪寬、深度...資訊，用來檢查碰撞
+
+# 方法內部參數，我們不用去調整
+method: multigrasp_layer1 # 分為multigrasp_layer1和multigrasp_layer2，1預測出的grasp變異性較低但成功率平均更高，2能得到更多樣化預測，但平均成功率低
+load_model: test_assets/multigrasp_layer1/refine_15.model # 須配合method更改layer
+use_region: true # 本篇方法提出的"將關鍵點附近的全部點一起丟入算特徵"功能
+use_analytic: false # 訓練時計算loss用的，inference用不到
+camera: our # 就只是個名稱，拿來分辨不同機型時使用的調整
+
+# python grasp_detect_from_file_multiobjects.py --config config.yaml
