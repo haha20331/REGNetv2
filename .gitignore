@@ -1,4 +1,7 @@
 REGNet-V2/test_file/
+*.p
+*.npy
+*.glb
 # # some models
 # test_assets/*gpd*
 # s4g
