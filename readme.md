@@ -1,3 +1,4 @@
+# Clone From https://github.com/zhaobinglei/REGNet-V2
 # Requirements
 * GPU: NVIDIA GeForce RTX 2080 (8192 MB)
 * REGNet-V2/requirements.txt 為conda安裝環境檔
