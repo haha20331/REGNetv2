@@ -1,6 +1,6 @@
 cuda: true
 gpu: 0
-exp_name: dust3r/bottle/layer2_surround
+exp_name: dust3r/bottle/layer2_surround # 存放進vis_output內的路徑
 pc_paths: ./our_data/dust3r/np/bottle.npy # 場景點雲路徑
 vis_output: ./vis_grasp/ # 儲存視覺化地方
 
@@ -12,12 +12,12 @@ horizontal_view_elev: 50 # 水平視角時的elev視覺化角度
 horizontal_view_azim: 120 # 水平視角時的azim視覺化角度
 
 # 須配合機械手臂和環境調整的參數
-eval_width: 0.04 # 機器手臂夾爪寬度
+eval_width: 0.06 # 機器手臂夾爪寬度
 all_points_num: 25600 # 點雲sample的point數量
 table_height: 0 # 會把高度低於該值得grasp pose篩掉
-bounds: [-1, 1, -1, 1] # 會把超出該範圍的grasp 篩掉
+bounds: [-1, 1, -1, 1] # =work space會把超出該範圍的grasp 篩掉
 z_rescale: 1.2 # 把z軸的差距拉大，原本預設1.2，但在夾線圈這種z軸變化不大物品，調大會有更好效果
-camera_transform:
+camera_transform: # 相機外參，需要準確提供，目前沒有所以全通靈
   euler_deg: [-120, 0.0, 180.0]  # XYZ 歐拉角
   translation: [0.0, 0.0, 0.5]   # T_x, T_y, T_z
   # mike 超參
