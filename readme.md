@@ -2,6 +2,7 @@
 # HackMD
 * https://hackmd.io/Re3AOcMzQw6225ofWveIzw
 # Requirements
+* Python = 3.11.8, CUDA = 12.4
 * GPU: NVIDIA GeForce RTX 2080 (8192 MB)
 * REGNet-V2/requirements.txt 為conda安裝環境檔
 
