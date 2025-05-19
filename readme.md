@@ -5,6 +5,9 @@
 * Python = 3.11.8, CUDA = 12.4
 * GPU: NVIDIA GeForce RTX 2080 (8192 MB)
 * REGNet-V2/requirements.txt 為conda安裝環境檔
+* 跟隨原版readme中INSTALL在multi_model/utils/pn2_utils和functions下的setup安裝
+    * 在setup時，忘記哪個套件版本裝太新時，會有一系列警告用的code全部因版本更新而被換掉
+    * 只要一個個把它改成新版的格式，或是直接註解掉，眼不見為淨
 
 # Inference
 * Inference code: REGNet-V2/grasp_detect_from_file_multiobjects.py
